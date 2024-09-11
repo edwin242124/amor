@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARA LA REYNA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .intro {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+            z-index: 10;
+            animation: fadeOut 30s forwards; /* Tiempo extendido para leer el texto */
+            color: #fff; /* Color del texto blanco */
+            text-align: center; /* Centra el texto horizontalmente en el contenedor */
+            padding: 20px; /* Espacio alrededor del texto */
+            box-sizing: border-box;
+        }
+
+        .intro h1 {
+            font-size: 2.5rem;
+            font-family: 'Love Ya Like A Sister', cursive;
+            border: 4px solid #FFD700; /* Borde dorado más grueso */
+            border-radius: 15px; /* Bordes redondeados */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo del texto transparente */
+            margin: 0;
+            line-height: 1.4; /* Mejora la legibilidad del texto largo */
+            width: calc(100% - 50px); /* Ajusta el ancho para que tenga margen */
+            display: block; /* Asegura que el texto ocupe todo el ancho disponible */
+            position: absolute; /* Asegura que el texto esté en la posición correcta */
+            top: 0; /* Ajusta el texto para que esté en la parte superior */
+            left: 0; /* Alinea el texto con el borde izquierdo */
+            bottom: 0; /* Ajusta el texto para que ocupe la altura completa */
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: fadeIn 2s forwards 20s; /* Cambia la animación de la introducción */
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fade 20s infinite;
+        }
+
+        /* Cambia estas rutas a tus imágenes */
+        .slide:nth-child(2) { background-image: url('mirada.jpg'); animation-delay: 5s; }
+        .slide:nth-child(3) { background-image: url('beso.jpg'); animation-delay: 10s; }
+        .slide:nth-child(4) { background-image: url('corazon.jpg'); animation-delay: 15s; }
+
+        .text-overlay {
+            position: absolute;
+            font-size: 1.5rem; /* Ajusta el tamaño del texto */
+            font-family: 'Love Ya Like A Sister', cursive;
+            max-width: 80%; /* Limita el ancho del texto */
+            text-align: center; /* Centra el texto */
+            color: #FFD700; /* Color dorado para contrastar con fondos oscuros */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Contorno oscuro para mejorar la visibilidad */
+            opacity: 0;
+            animation: textFade 20s infinite;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Coloca el texto en tres lugares específicos */
+        .text-overlay:nth-child(5) {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 5s;
+            animation-duration: 5s; /* Duración para que el texto permanezca visible */
+        }
+        .text-overlay:nth-child(6) {
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 10s;
+            animation-duration: 5s;
+        }
+        .text-overlay:nth-child(7) {
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 15s;
+            animation-duration: 5s;
+        }
+
+        /* Contenedor para los logos */
+        .logo-container {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra los logos horizontalmente */
+        }
+
+        .logo-container.left {
+            left: 20px;
+        }
+
+        .logo-container.right {
+            right: 20px;
+        }
+
+        /* Estilo para cada logo */
+        .logo-container img {
+            width: 100px; /* Tamaño ajustado del logo */
+            margin: 5px 0; /* Espacio entre logos */
+            border: 4px solid #FFD700; /* Borde dorado similar al del texto */
+            border-radius: 10px; /* Bordes redondeados similares al del texto */
+        }
+
+        /* Texto de autor */
+        .author-text {
+            position: absolute;
+            bottom: 10px; /* Ubicado en la parte inferior de la pantalla */
+            left: 50%;
+            transform: translateX(-50%); /* Centra horizontalmente */
+            font-size: 1.5rem;
+            font-family: 'Love Ya Like A Sister', cursive;
+            color: #FFD700; /* Color dorado para mantener el contraste */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Contorno oscuro para mejorar la visibilidad */
+            animation: authorMovement 5s infinite; /* Animación de movimiento */
+            text-align: center; /* Centra el texto */
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes textFade {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes logoAnimation {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes authorMovement {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <!-- Intro -->
+    <div class="intro">
+        <h1>Para la reina de mi vida, mi vampira favorita. 💖✨ Eres el sueño hecho realidad que nunca supe que tenía, la melodía que llena mis días con felicidad y amor. Cada momento a tu lado es una aventura mágica que atesoro profundamente. Tu amor ilumina mi vida como una estrella brillante en la oscuridad. 🌹🌟 Eres el regalo más hermoso que he recibido, y me siento eternamente agradecido por cada instante que compartimos. ¡Te amo más allá de las palabras, y cada segundo contigo es un tesoro precioso! 💞🌟</h1>
+    </div>
+
+    <!-- Video Content -->
+    <div class="content">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+
+        <!-- Text Overlays en tres lugares específicos -->
+        <div class="text-overlay">
+            Desde el momento en que te vi, supe que mi vida iba a cambiar para siempre. Eres la luz que ilumina mis días más oscuros y la razón por la que me levanto cada mañana con una sonrisa. 💖 Eres mi inspiración diaria, mi apoyo incondicional y la melodía que hace latir mi corazón más rápido. Cada momento a tu lado es un regalo precioso que atesoro más de lo que las palabras pueden expresar. 🌹✨ Como programador, paso horas frente a una pantalla, creando códigos y solucionando problemas, pero nada se compara con la alegría de hacer todo por ti. Mi amor, cada línea de código que escribo tiene un propósito: hacerte feliz y construir un futuro juntos lleno de amor y aventuras. 💻❤️ Tu amor me impulsa a ser mejor cada día y a esforzarme por ser el mejor en todo lo que hago. Gracias por ser mi inspiración y por darme razones para seguir adelante con una pasión renovada. Te amo más allá de las palabras y de cualquier línea de código. 💞💫
+        </div>
+
+        <!-- Contenedor para los logos -->
+        <div class="logo-container left">
+            <img src="silvia.jpg" alt="Logo 1">
+            <img src="margoht.jpg" alt="Logo 2">
+            <img src="silvia.jpg" alt="Logo 3">
+            <img src="silvia.jpg" alt="Logo 4">
+            <img src="margoht.jpg" alt="Logo 5">
+        </div>
+
+        <div class="logo-container right">
+            <img src="silvia.jpg" alt="Logo 1">
+            <img src="margoht.jpg" alt="Logo 2">
+            <img src="silvia.jpg" alt="Logo 3">
+            <img src="silvia.jpg" alt="Logo 4">
+            <img src="margoht.jpg" alt="Logo 5">
+        </div>
+
+        <!-- Texto de autor -->
+        <div class="author-text">Atentamente, Edwin Laura</div>
+    </div>
+</div>
+
+</body>
+</html>
